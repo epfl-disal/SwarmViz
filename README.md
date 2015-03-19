@@ -11,6 +11,7 @@ Make sure the qmake command points to qmake 3.0, provided by Qt5. If not, run th
     export PATH="<Qt5 install dir>/<Qt version>/<compiler>/bin:$PATH"
 
 Then, run
+
     ./config
     make clean all
 
@@ -18,14 +19,14 @@ Then, run
 
 To run SwarmViz use either QtCreator or run
 
-    ./bin/swarmviz& 
+    ./bin/swarmviz & 
 
 ## Documentation
 
 Run Doxygen 1.8.9.1 on the Doxyfile:
 
-  cd src
-  doxygen Doxyfile
+    cd src
+    doxygen Doxyfile
 
 ## Dependencies 
 
