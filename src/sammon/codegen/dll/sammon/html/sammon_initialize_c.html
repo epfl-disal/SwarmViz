@@ -1,0 +1,49 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>RTW Report - sammon_initialize.c</title>
+<script language="JavaScript" type="text/javascript" src="rtwreport_utils.js"></script>
+</head>
+<body bgcolor="#eeeeee" text="#1122aa" onload="try {if (top) { if (top.rtwFileOnLoad) top.rtwFileOnLoad(window.document); else local_onload();}} catch(err) {};">
+<p>
+<table border="0" cellspacing="0" cellpadding="6" width="100%%" height="100%%"><tr><td width="100%%" valign="top" bgcolor="#ffffff">
+<h4>File: <a href="../sammon_initialize.c" target="rtwreport_document_frame" id="linkToText_plain">sammon_initialize.c</a></h4>
+<pre id="RTWcode">
+<a name="1"><font color="#888888 "><i>    1   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * sammon_initialize.c</i></font>
+<a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * Code generation for function 'sammon_initialize'</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> * C source code generated on: Tue Dec 31 15:20:19 2013</i></font>
+<a name="7"><font color="#888888 "><i>    7   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="9"><font color="#888888 "><i>    9   </i></font></a>
+<a name="10"><font color="#888888 "><i>   10   </i></font></a><font color="#117755"><i>/* Include files */</i></font>
+<a name="11"><font color="#888888 "><i>   11   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;rt_nonfinite.h&quot;</font>
+<a name="12"><font color="#888888 "><i>   12   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;sammon.h&quot;</font>
+<a name="13"><font color="#888888 "><i>   13   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;sammon_initialize.h&quot;</font>
+<a name="14"><font color="#888888 "><i>   14   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;sammon_data.h&quot;</font>
+<a name="15"><font color="#888888 "><i>   15   </i></font></a>
+<a name="16"><font color="#888888 "><i>   16   </i></font></a><font color="#117755"><i>/* Function Definitions */</i></font>
+<a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_sammon_initialize">sammon_initialize</a>(<font color="#112266"><b>void</b></font>)
+<a name="18"><font color="#888888 "><i>   18   </i></font></a><b>{</b>
+<a name="19"><font color="#888888 "><i>   19   </i></font></a>  <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> r;
+<a name="20"><font color="#888888 "><i>   20   </i></font></a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a> mti;
+<a name="21"><font color="#888888 "><i>   21   </i></font></a>  <a href="rt_nonfinite_c.html#fcn_rt_InitInfAndNaN" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_rt_InitInfAndNaN');" target="rtwreport_document_frame"><font color="#1122aa">rt_InitInfAndNaN</font></a>(8U);
+<a name="22"><font color="#888888 "><i>   22   </i></font></a>  memset(&amp;<a href="sammon_data_c.html#var_state" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_state');" target="rtwreport_document_frame"><font color="#1122aa">state</font></a>[0], 0, 625U * <font color="#112266"><b>sizeof</b></font>(<a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a>));
+<a name="23"><font color="#888888 "><i>   23   </i></font></a>  r = 5489U;
+<a name="24"><font color="#888888 "><i>   24   </i></font></a>  <a href="sammon_data_c.html#var_state" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_state');" target="rtwreport_document_frame"><font color="#1122aa">state</font></a>[0] = 5489U;
+<a name="25"><font color="#888888 "><i>   25   </i></font></a>  <font color="#112266"><b>for</b></font> (mti = 0; mti &lt; 623; mti++) <b>{</b>
+<a name="26"><font color="#888888 "><i>   26   </i></font></a>    r = (r ^ r &gt;&gt; 30U) * 1812433253U + (1 + mti);
+<a name="27"><font color="#888888 "><i>   27   </i></font></a>    <a href="sammon_data_c.html#var_state" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_state');" target="rtwreport_document_frame"><font color="#1122aa">state</font></a>[1 + mti] = r;
+<a name="28"><font color="#888888 "><i>   28   </i></font></a>  <b>}</b>
+<a name="29"><font color="#888888 "><i>   29   </i></font></a>
+<a name="30"><font color="#888888 "><i>   30   </i></font></a>  <a href="sammon_data_c.html#var_state" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_state');" target="rtwreport_document_frame"><font color="#1122aa">state</font></a>[624] = 624U;
+<a name="31"><font color="#888888 "><i>   31   </i></font></a><b>}</b>
+<a name="32"><font color="#888888 "><i>   32   </i></font></a>
+<a name="33"><font color="#888888 "><i>   33   </i></font></a><font color="#117755"><i>/* End of code generation (sammon_initialize.c) */</i></font>
+<a name="34"><font color="#888888 "><i>   34   </i></font></a></pre>
+</td></tr></table>
+</p>
+</body>
+</html>

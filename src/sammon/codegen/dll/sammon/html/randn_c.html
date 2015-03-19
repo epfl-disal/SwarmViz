@@ -1,0 +1,373 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>RTW Report - randn.c</title>
+<script language="JavaScript" type="text/javascript" src="rtwreport_utils.js"></script>
+</head>
+<body bgcolor="#eeeeee" text="#1122aa" onload="try {if (top) { if (top.rtwFileOnLoad) top.rtwFileOnLoad(window.document); else local_onload();}} catch(err) {};">
+<p>
+<table border="0" cellspacing="0" cellpadding="6" width="100%%" height="100%%"><tr><td width="100%%" valign="top" bgcolor="#ffffff">
+<h4>File: <a href="../randn.c" target="rtwreport_document_frame" id="linkToText_plain">randn.c</a></h4>
+<pre id="RTWcode">
+<a name="1"><font color="#888888 "><i>    1   </i></font></a><font color="#117755"><i>/*</i></font>
+<a name="2"><font color="#888888 "><i>    2   </i></font></a><font color="#117755"><I> * randn.c</i></font>
+<a name="3"><font color="#888888 "><i>    3   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="4"><font color="#888888 "><i>    4   </i></font></a><font color="#117755"><I> * Code generation for function 'randn'</i></font>
+<a name="5"><font color="#888888 "><i>    5   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="6"><font color="#888888 "><i>    6   </i></font></a><font color="#117755"><I> * C source code generated on: Tue Dec 31 15:20:19 2013</i></font>
+<a name="7"><font color="#888888 "><i>    7   </i></font></a><font color="#117755"><I> *</i></font>
+<a name="8"><font color="#888888 "><i>    8   </i></font></a><font color="#117755"><I> */</i></font>
+<a name="9"><font color="#888888 "><i>    9   </i></font></a>
+<a name="10"><font color="#888888 "><i>   10   </i></font></a><font color="#117755"><i>/* Include files */</i></font>
+<a name="11"><font color="#888888 "><i>   11   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;rt_nonfinite.h&quot;</font>
+<a name="12"><font color="#888888 "><i>   12   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;sammon.h&quot;</font>
+<a name="13"><font color="#888888 "><i>   13   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;randn.h&quot;</font>
+<a name="14"><font color="#888888 "><i>   14   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;sammon_emxutil.h&quot;</font>
+<a name="15"><font color="#888888 "><i>   15   </i></font></a><font color="#992211">#</font><font color="#992211"><b>include</b></font> <font color="#992211">&quot;sammon_data.h&quot;</font>
+<a name="16"><font color="#888888 "><i>   16   </i></font></a>
+<a name="17"><font color="#888888 "><i>   17   </i></font></a><font color="#117755"><i>/* Function Declarations */</i></font>
+<a name="18"><font color="#888888 "><i>   18   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a href="#fcn_genrand_uint32_vector" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_genrand_uint32_vector');" target="rtwreport_document_frame"><font color="#1122aa">genrand_uint32_vector</font></a>(<a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> mt[625], <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> u[2]);
+<a name="19"><font color="#888888 "><i>   19   </i></font></a><font color="#112266"><b>static</b></font> <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a> <a href="#fcn_genrandu" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_genrandu');" target="rtwreport_document_frame"><font color="#1122aa">genrandu</font></a>(<a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> mt[625]);
+<a name="20"><font color="#888888 "><i>   20   </i></font></a>
+<a name="21"><font color="#888888 "><i>   21   </i></font></a><font color="#117755"><i>/* Function Definitions */</i></font>
+<a name="22"><font color="#888888 "><i>   22   </i></font></a><font color="#112266"><b>static</b></font> <font color="#112266"><b>void</b></font> <a name="fcn_genrand_uint32_vector">genrand_uint32_vector</a>(<a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> mt[625], <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> u[2])
+<a name="23"><font color="#888888 "><i>   23   </i></font></a><b>{</b>
+<a name="24"><font color="#888888 "><i>   24   </i></font></a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a> i;
+<a name="25"><font color="#888888 "><i>   25   </i></font></a>  <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> mti;
+<a name="26"><font color="#888888 "><i>   26   </i></font></a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a> kk;
+<a name="27"><font color="#888888 "><i>   27   </i></font></a>  <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> y;
+<a name="28"><font color="#888888 "><i>   28   </i></font></a>  <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> b_y;
+<a name="29"><font color="#888888 "><i>   29   </i></font></a>  <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> c_y;
+<a name="30"><font color="#888888 "><i>   30   </i></font></a>  <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> d_y;
+<a name="31"><font color="#888888 "><i>   31   </i></font></a>  <font color="#112266"><b>for</b></font> (i = 0; i &lt; 2; i++) <b>{</b>
+<a name="32"><font color="#888888 "><i>   32   </i></font></a>    u[i] = 0U;
+<a name="33"><font color="#888888 "><i>   33   </i></font></a>  <b>}</b>
+<a name="34"><font color="#888888 "><i>   34   </i></font></a>
+<a name="35"><font color="#888888 "><i>   35   </i></font></a>  <font color="#112266"><b>for</b></font> (i = 0; i &lt; 2; i++) <b>{</b>
+<a name="36"><font color="#888888 "><i>   36   </i></font></a>    mti = mt[624] + 1U;
+<a name="37"><font color="#888888 "><i>   37   </i></font></a>    <font color="#112266"><b>if</b></font> (mti &gt;= 625U) <b>{</b>
+<a name="38"><font color="#888888 "><i>   38   </i></font></a>      <font color="#112266"><b>for</b></font> (kk = 0; kk &lt; 227; kk++) <b>{</b>
+<a name="39"><font color="#888888 "><i>   39   </i></font></a>        y = (mt[kk] &amp; 2147483648U) | (mt[1 + kk] &amp; 2147483647U);
+<a name="40"><font color="#888888 "><i>   40   </i></font></a>        <font color="#112266"><b>if</b></font> ((<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)(y &amp; 1U) == 0) <b>{</b>
+<a name="41"><font color="#888888 "><i>   41   </i></font></a>          b_y = y &gt;&gt; 1U;
+<a name="42"><font color="#888888 "><i>   42   </i></font></a>        <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="43"><font color="#888888 "><i>   43   </i></font></a>          b_y = y &gt;&gt; 1U ^ 2567483615U;
+<a name="44"><font color="#888888 "><i>   44   </i></font></a>        <b>}</b>
+<a name="45"><font color="#888888 "><i>   45   </i></font></a>
+<a name="46"><font color="#888888 "><i>   46   </i></font></a>        mt[kk] = mt[397 + kk] ^ b_y;
+<a name="47"><font color="#888888 "><i>   47   </i></font></a>      <b>}</b>
+<a name="48"><font color="#888888 "><i>   48   </i></font></a>
+<a name="49"><font color="#888888 "><i>   49   </i></font></a>      <font color="#112266"><b>for</b></font> (kk = 0; kk &lt; 396; kk++) <b>{</b>
+<a name="50"><font color="#888888 "><i>   50   </i></font></a>        y = (mt[227 + kk] &amp; 2147483648U) | (mt[228 + kk] &amp; 2147483647U);
+<a name="51"><font color="#888888 "><i>   51   </i></font></a>        <font color="#112266"><b>if</b></font> ((<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)(y &amp; 1U) == 0) <b>{</b>
+<a name="52"><font color="#888888 "><i>   52   </i></font></a>          c_y = y &gt;&gt; 1U;
+<a name="53"><font color="#888888 "><i>   53   </i></font></a>        <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="54"><font color="#888888 "><i>   54   </i></font></a>          c_y = y &gt;&gt; 1U ^ 2567483615U;
+<a name="55"><font color="#888888 "><i>   55   </i></font></a>        <b>}</b>
+<a name="56"><font color="#888888 "><i>   56   </i></font></a>
+<a name="57"><font color="#888888 "><i>   57   </i></font></a>        mt[227 + kk] = mt[kk] ^ c_y;
+<a name="58"><font color="#888888 "><i>   58   </i></font></a>      <b>}</b>
+<a name="59"><font color="#888888 "><i>   59   </i></font></a>
+<a name="60"><font color="#888888 "><i>   60   </i></font></a>      y = (mt[623] &amp; 2147483648U) | (mt[0] &amp; 2147483647U);
+<a name="61"><font color="#888888 "><i>   61   </i></font></a>      <font color="#112266"><b>if</b></font> ((<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)(y &amp; 1U) == 0) <b>{</b>
+<a name="62"><font color="#888888 "><i>   62   </i></font></a>        d_y = y &gt;&gt; 1U;
+<a name="63"><font color="#888888 "><i>   63   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="64"><font color="#888888 "><i>   64   </i></font></a>        d_y = y &gt;&gt; 1U ^ 2567483615U;
+<a name="65"><font color="#888888 "><i>   65   </i></font></a>      <b>}</b>
+<a name="66"><font color="#888888 "><i>   66   </i></font></a>
+<a name="67"><font color="#888888 "><i>   67   </i></font></a>      mt[623] = mt[396] ^ d_y;
+<a name="68"><font color="#888888 "><i>   68   </i></font></a>      mti = 1U;
+<a name="69"><font color="#888888 "><i>   69   </i></font></a>    <b>}</b>
+<a name="70"><font color="#888888 "><i>   70   </i></font></a>
+<a name="71"><font color="#888888 "><i>   71   </i></font></a>    y = mt[(<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)mti - 1];
+<a name="72"><font color="#888888 "><i>   72   </i></font></a>    mt[624] = mti;
+<a name="73"><font color="#888888 "><i>   73   </i></font></a>    y ^= y &gt;&gt; 11U;
+<a name="74"><font color="#888888 "><i>   74   </i></font></a>    y ^= y &lt;&lt; 7U &amp; 2636928640U;
+<a name="75"><font color="#888888 "><i>   75   </i></font></a>    y ^= y &lt;&lt; 15U &amp; 4022730752U;
+<a name="76"><font color="#888888 "><i>   76   </i></font></a>    y ^= y &gt;&gt; 18U;
+<a name="77"><font color="#888888 "><i>   77   </i></font></a>    u[i] = y;
+<a name="78"><font color="#888888 "><i>   78   </i></font></a>  <b>}</b>
+<a name="79"><font color="#888888 "><i>   79   </i></font></a><b>}</b>
+<a name="80"><font color="#888888 "><i>   80   </i></font></a>
+<a name="81"><font color="#888888 "><i>   81   </i></font></a><font color="#112266"><b>static</b></font> <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a> <a name="fcn_genrandu">genrandu</a>(<a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> mt[625])
+<a name="82"><font color="#888888 "><i>   82   </i></font></a><b>{</b>
+<a name="83"><font color="#888888 "><i>   83   </i></font></a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a> r;
+<a name="84"><font color="#888888 "><i>   84   </i></font></a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a> exitg1;
+<a name="85"><font color="#888888 "><i>   85   </i></font></a>  <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> u[2];
+<a name="86"><font color="#888888 "><i>   86   </i></font></a>  <a href="rtwtypes_h.html#type_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_boolean_T');" target="rtwreport_document_frame"><font color="#1122aa">boolean_T</font></a> isvalid;
+<a name="87"><font color="#888888 "><i>   87   </i></font></a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a> k;
+<a name="88"><font color="#888888 "><i>   88   </i></font></a>  <a href="rtwtypes_h.html#type_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_boolean_T');" target="rtwreport_document_frame"><font color="#1122aa">boolean_T</font></a> exitg2;
+<a name="89"><font color="#888888 "><i>   89   </i></font></a>  <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> b_r;
+<a name="90"><font color="#888888 "><i>   90   </i></font></a>
+<a name="91"><font color="#888888 "><i>   91   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;   This is a uniform (0,1) pseudorandom number generator based on: */</i></font>
+<a name="92"><font color="#888888 "><i>   92   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt; */</i></font>
+<a name="93"><font color="#888888 "><i>   93   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    A C-program for MT19937, with initialization improved 2002/1/26. */</i></font>
+<a name="94"><font color="#888888 "><i>   94   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    Coded by Takuji Nishimura and Makoto Matsumoto. */</i></font>
+<a name="95"><font color="#888888 "><i>   95   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt; */</i></font>
+<a name="96"><font color="#888888 "><i>   96   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    Copyright (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura, */</i></font>
+<a name="97"><font color="#888888 "><i>   97   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    All rights reserved. */</i></font>
+<a name="98"><font color="#888888 "><i>   98   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt; */</i></font>
+<a name="99"><font color="#888888 "><i>   99   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    Redistribution and use in source and binary forms, with or without */</i></font>
+<a name="100"><font color="#888888 "><i>  100   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    modification, are permitted provided that the following conditions */</i></font>
+<a name="101"><font color="#888888 "><i>  101   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    are met: */</i></font>
+<a name="102"><font color="#888888 "><i>  102   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt; */</i></font>
+<a name="103"><font color="#888888 "><i>  103   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;      1. Redistributions of source code must retain the above copyright */</i></font>
+<a name="104"><font color="#888888 "><i>  104   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;         notice, this list of conditions and the following disclaimer. */</i></font>
+<a name="105"><font color="#888888 "><i>  105   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt; */</i></font>
+<a name="106"><font color="#888888 "><i>  106   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;      2. Redistributions in binary form must reproduce the above copyright */</i></font>
+<a name="107"><font color="#888888 "><i>  107   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;         notice, this list of conditions and the following disclaimer in the */</i></font>
+<a name="108"><font color="#888888 "><i>  108   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;         documentation and/or other materials provided with the distribution. */</i></font>
+<a name="109"><font color="#888888 "><i>  109   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt; */</i></font>
+<a name="110"><font color="#888888 "><i>  110   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;      3. The names of its contributors may not be used to endorse or promote */</i></font>
+<a name="111"><font color="#888888 "><i>  111   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;         products derived from this software without specific prior written */</i></font>
+<a name="112"><font color="#888888 "><i>  112   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;         permission. */</i></font>
+<a name="113"><font color="#888888 "><i>  113   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt; */</i></font>
+<a name="114"><font color="#888888 "><i>  114   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS */</i></font>
+<a name="115"><font color="#888888 "><i>  115   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT */</i></font>
+<a name="116"><font color="#888888 "><i>  116   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR */</i></font>
+<a name="117"><font color="#888888 "><i>  117   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR */</i></font>
+<a name="118"><font color="#888888 "><i>  118   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, */</i></font>
+<a name="119"><font color="#888888 "><i>  119   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, */</i></font>
+<a name="120"><font color="#888888 "><i>  120   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR */</i></font>
+<a name="121"><font color="#888888 "><i>  121   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF */</i></font>
+<a name="122"><font color="#888888 "><i>  122   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING */</i></font>
+<a name="123"><font color="#888888 "><i>  123   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS */</i></font>
+<a name="124"><font color="#888888 "><i>  124   </i></font></a>  <font color="#117755"><i>/* &lt;LEGAL&gt;    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */</i></font>
+<a name="125"><font color="#888888 "><i>  125   </i></font></a>  <font color="#112266"><b>do</b></font> <b>{</b>
+<a name="126"><font color="#888888 "><i>  126   </i></font></a>    exitg1 = 0;
+<a name="127"><font color="#888888 "><i>  127   </i></font></a>    <a href="#fcn_genrand_uint32_vector" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_genrand_uint32_vector');" target="rtwreport_document_frame"><font color="#1122aa">genrand_uint32_vector</font></a>(mt, u);
+<a name="128"><font color="#888888 "><i>  128   </i></font></a>    r = 1.1102230246251565E-16 * ((<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a>)(u[0] &gt;&gt; 5U) * 6.7108864E+7 + (<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a>)
+<a name="129"><font color="#888888 "><i>  129   </i></font></a>                                  (u[1] &gt;&gt; 6U));
+<a name="130"><font color="#888888 "><i>  130   </i></font></a>    <font color="#112266"><b>if</b></font> (r == 0.0) <b>{</b>
+<a name="131"><font color="#888888 "><i>  131   </i></font></a>      <font color="#112266"><b>if</b></font> ((mt[624] &gt;= 1U) &amp;&amp; (mt[624] &lt; 625U)) <b>{</b>
+<a name="132"><font color="#888888 "><i>  132   </i></font></a>        isvalid = TRUE;
+<a name="133"><font color="#888888 "><i>  133   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="134"><font color="#888888 "><i>  134   </i></font></a>        isvalid = FALSE;
+<a name="135"><font color="#888888 "><i>  135   </i></font></a>      <b>}</b>
+<a name="136"><font color="#888888 "><i>  136   </i></font></a>
+<a name="137"><font color="#888888 "><i>  137   </i></font></a>      <font color="#112266"><b>if</b></font> (isvalid) <b>{</b>
+<a name="138"><font color="#888888 "><i>  138   </i></font></a>        isvalid = FALSE;
+<a name="139"><font color="#888888 "><i>  139   </i></font></a>        k = 1;
+<a name="140"><font color="#888888 "><i>  140   </i></font></a>        exitg2 = FALSE;
+<a name="141"><font color="#888888 "><i>  141   </i></font></a>        <font color="#112266"><b>while</b></font> ((exitg2 == FALSE) &amp;&amp; (k &lt; 625)) <b>{</b>
+<a name="142"><font color="#888888 "><i>  142   </i></font></a>          <font color="#112266"><b>if</b></font> (mt[k - 1] == 0U) <b>{</b>
+<a name="143"><font color="#888888 "><i>  143   </i></font></a>            k++;
+<a name="144"><font color="#888888 "><i>  144   </i></font></a>          <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="145"><font color="#888888 "><i>  145   </i></font></a>            isvalid = TRUE;
+<a name="146"><font color="#888888 "><i>  146   </i></font></a>            exitg2 = TRUE;
+<a name="147"><font color="#888888 "><i>  147   </i></font></a>          <b>}</b>
+<a name="148"><font color="#888888 "><i>  148   </i></font></a>        <b>}</b>
+<a name="149"><font color="#888888 "><i>  149   </i></font></a>      <b>}</b>
+<a name="150"><font color="#888888 "><i>  150   </i></font></a>
+<a name="151"><font color="#888888 "><i>  151   </i></font></a>      <font color="#112266"><b>if</b></font> (!isvalid) <b>{</b>
+<a name="152"><font color="#888888 "><i>  152   </i></font></a>        b_r = 5489U;
+<a name="153"><font color="#888888 "><i>  153   </i></font></a>        mt[0] = 5489U;
+<a name="154"><font color="#888888 "><i>  154   </i></font></a>        <font color="#112266"><b>for</b></font> (k = 0; k &lt; 623; k++) <b>{</b>
+<a name="155"><font color="#888888 "><i>  155   </i></font></a>          b_r = (b_r ^ b_r &gt;&gt; 30U) * 1812433253U + (1 + k);
+<a name="156"><font color="#888888 "><i>  156   </i></font></a>          mt[1 + k] = b_r;
+<a name="157"><font color="#888888 "><i>  157   </i></font></a>        <b>}</b>
+<a name="158"><font color="#888888 "><i>  158   </i></font></a>
+<a name="159"><font color="#888888 "><i>  159   </i></font></a>        mt[624] = 624U;
+<a name="160"><font color="#888888 "><i>  160   </i></font></a>      <b>}</b>
+<a name="161"><font color="#888888 "><i>  161   </i></font></a>    <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="162"><font color="#888888 "><i>  162   </i></font></a>      exitg1 = 1;
+<a name="163"><font color="#888888 "><i>  163   </i></font></a>    <b>}</b>
+<a name="164"><font color="#888888 "><i>  164   </i></font></a>  <b>}</b> <font color="#112266"><b>while</b></font> (exitg1 == 0);
+<a name="165"><font color="#888888 "><i>  165   </i></font></a>
+<a name="166"><font color="#888888 "><i>  166   </i></font></a>  <font color="#112266"><b>return</b></font> r;
+<a name="167"><font color="#888888 "><i>  167   </i></font></a><b>}</b>
+<a name="168"><font color="#888888 "><i>  168   </i></font></a>
+<a name="169"><font color="#888888 "><i>  169   </i></font></a><font color="#112266"><b>void</b></font> <a name="fcn_randn">randn</a>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a> varargin_1, <a href="sammon_types_h.html#type_emxArray_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray_real_T');" target="rtwreport_document_frame"><font color="#1122aa">emxArray_real_T</font></a> *r)
+<a name="170"><font color="#888888 "><i>  170   </i></font></a><b>{</b>
+<a name="171"><font color="#888888 "><i>  171   </i></font></a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a> i6;
+<a name="172"><font color="#888888 "><i>  172   </i></font></a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a> k;
+<a name="173"><font color="#888888 "><i>  173   </i></font></a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a> exitg1;
+<a name="174"><font color="#888888 "><i>  174   </i></font></a>  <a href="rtwtypes_h.html#type_uint32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_uint32_T');" target="rtwreport_document_frame"><font color="#1122aa">uint32_T</font></a> u32[2];
+<a name="175"><font color="#888888 "><i>  175   </i></font></a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a> i;
+<a name="176"><font color="#888888 "><i>  176   </i></font></a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a> ip1;
+<a name="177"><font color="#888888 "><i>  177   </i></font></a>  <font color="#112266"><b>static</b></font> <font color="#112266"><b>const</b></font> <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a> dv0[257] = <b>{</b> 0.0, 0.215241895984875, 0.286174591792068,
+<a name="178"><font color="#888888 "><i>  178   </i></font></a>    0.335737519214422, 0.375121332878378, 0.408389134611989, 0.43751840220787,
+<a name="179"><font color="#888888 "><i>  179   </i></font></a>    0.46363433679088, 0.487443966139235, 0.50942332960209, 0.529909720661557,
+<a name="180"><font color="#888888 "><i>  180   </i></font></a>    0.549151702327164, 0.567338257053817, 0.584616766106378, 0.601104617755991,
+<a name="181"><font color="#888888 "><i>  181   </i></font></a>    0.61689699000775, 0.63207223638606, 0.646695714894993, 0.660822574244419,
+<a name="182"><font color="#888888 "><i>  182   </i></font></a>    0.674499822837293, 0.687767892795788, 0.700661841106814, 0.713212285190975,
+<a name="183"><font color="#888888 "><i>  183   </i></font></a>    0.725446140909999, 0.737387211434295, 0.749056662017815, 0.760473406430107,
+<a name="184"><font color="#888888 "><i>  184   </i></font></a>    0.771654424224568, 0.782615023307232, 0.793369058840623, 0.80392911698997,
+<a name="185"><font color="#888888 "><i>  185   </i></font></a>    0.814306670135215, 0.824512208752291, 0.834555354086381, 0.844444954909153,
+<a name="186"><font color="#888888 "><i>  186   </i></font></a>    0.854189171008163, 0.863795545553308, 0.87327106808886, 0.882622229585165,
+<a name="187"><font color="#888888 "><i>  187   </i></font></a>    0.891855070732941, 0.900975224461221, 0.909987953496718, 0.91889818364959,
+<a name="188"><font color="#888888 "><i>  188   </i></font></a>    0.927710533401999, 0.936429340286575, 0.945058684468165, 0.953602409881086,
+<a name="189"><font color="#888888 "><i>  189   </i></font></a>    0.96206414322304, 0.970447311064224, 0.978755155294224, 0.986990747099062,
+<a name="190"><font color="#888888 "><i>  190   </i></font></a>    0.99515699963509, 1.00325667954467, 1.01129241744, 1.01926671746548,
+<a name="191"><font color="#888888 "><i>  191   </i></font></a>    1.02718196603564, 1.03504043983344, 1.04284431314415, 1.05059566459093,
+<a name="192"><font color="#888888 "><i>  192   </i></font></a>    1.05829648333067, 1.06594867476212, 1.07355406579244, 1.0811144097034,
+<a name="193"><font color="#888888 "><i>  193   </i></font></a>    1.08863139065398, 1.09610662785202, 1.10354167942464, 1.11093804601357,
+<a name="194"><font color="#888888 "><i>  194   </i></font></a>    1.11829717411934, 1.12562045921553, 1.13290924865253, 1.14016484436815,
+<a name="195"><font color="#888888 "><i>  195   </i></font></a>    1.14738850542085, 1.15458145035993, 1.16174485944561, 1.16887987673083,
+<a name="196"><font color="#888888 "><i>  196   </i></font></a>    1.17598761201545, 1.18306914268269, 1.19012551542669, 1.19715774787944,
+<a name="197"><font color="#888888 "><i>  197   </i></font></a>    1.20416683014438, 1.2111537262437, 1.21811937548548, 1.22506469375653,
+<a name="198"><font color="#888888 "><i>  198   </i></font></a>    1.23199057474614, 1.23889789110569, 1.24578749554863, 1.2526602218949,
+<a name="199"><font color="#888888 "><i>  199   </i></font></a>    1.25951688606371, 1.26635828701823, 1.27318520766536, 1.27999841571382,
+<a name="200"><font color="#888888 "><i>  200   </i></font></a>    1.28679866449324, 1.29358669373695, 1.30036323033084, 1.30712898903073,
+<a name="201"><font color="#888888 "><i>  201   </i></font></a>    1.31388467315022, 1.32063097522106, 1.32736857762793, 1.33409815321936,
+<a name="202"><font color="#888888 "><i>  202   </i></font></a>    1.3408203658964, 1.34753587118059, 1.35424531676263, 1.36094934303328,
+<a name="203"><font color="#888888 "><i>  203   </i></font></a>    1.36764858359748, 1.37434366577317, 1.38103521107586, 1.38772383568998,
+<a name="204"><font color="#888888 "><i>  204   </i></font></a>    1.39441015092814, 1.40109476367925, 1.4077782768464, 1.41446128977547,
+<a name="205"><font color="#888888 "><i>  205   </i></font></a>    1.42114439867531, 1.42782819703026, 1.43451327600589, 1.44120022484872,
+<a name="206"><font color="#888888 "><i>  206   </i></font></a>    1.44788963128058, 1.45458208188841, 1.46127816251028, 1.46797845861808,
+<a name="207"><font color="#888888 "><i>  207   </i></font></a>    1.47468355569786, 1.48139403962819, 1.48811049705745, 1.49483351578049,
+<a name="208"><font color="#888888 "><i>  208   </i></font></a>    1.50156368511546, 1.50830159628131, 1.51504784277671, 1.521803020761,
+<a name="209"><font color="#888888 "><i>  209   </i></font></a>    1.52856772943771, 1.53534257144151, 1.542128153229, 1.54892508547417,
+<a name="210"><font color="#888888 "><i>  210   </i></font></a>    1.55573398346918, 1.56255546753104, 1.56939016341512, 1.57623870273591,
+<a name="211"><font color="#888888 "><i>  211   </i></font></a>    1.58310172339603, 1.58997987002419, 1.59687379442279, 1.60378415602609,
+<a name="212"><font color="#888888 "><i>  212   </i></font></a>    1.61071162236983, 1.61765686957301, 1.62462058283303, 1.63160345693487,
+<a name="213"><font color="#888888 "><i>  213   </i></font></a>    1.63860619677555, 1.64562951790478, 1.65267414708306, 1.65974082285818,
+<a name="214"><font color="#888888 "><i>  214   </i></font></a>    1.66683029616166, 1.67394333092612, 1.68108070472517, 1.68824320943719,
+<a name="215"><font color="#888888 "><i>  215   </i></font></a>    1.69543165193456, 1.70264685479992, 1.7098896570713, 1.71716091501782,
+<a name="216"><font color="#888888 "><i>  216   </i></font></a>    1.72446150294804, 1.73179231405296, 1.73915426128591, 1.74654827828172,
+<a name="217"><font color="#888888 "><i>  217   </i></font></a>    1.75397532031767, 1.76143636531891, 1.76893241491127, 1.77646449552452,
+<a name="218"><font color="#888888 "><i>  218   </i></font></a>    1.78403365954944, 1.79164098655216, 1.79928758454972, 1.80697459135082,
+<a name="219"><font color="#888888 "><i>  219   </i></font></a>    1.81470317596628, 1.82247454009388, 1.83028991968276, 1.83815058658281,
+<a name="220"><font color="#888888 "><i>  220   </i></font></a>    1.84605785028518, 1.8540130597602, 1.86201760539967, 1.87007292107127,
+<a name="221"><font color="#888888 "><i>  221   </i></font></a>    1.878180486293, 1.88634182853678, 1.8945585256707, 1.90283220855043,
+<a name="222"><font color="#888888 "><i>  222   </i></font></a>    1.91116456377125, 1.91955733659319, 1.92801233405266, 1.93653142827569,
+<a name="223"><font color="#888888 "><i>  223   </i></font></a>    1.94511656000868, 1.95376974238465, 1.96249306494436, 1.97128869793366,
+<a name="224"><font color="#888888 "><i>  224   </i></font></a>    1.98015889690048, 1.98910600761744, 1.99813247135842, 2.00724083056053,
+<a name="225"><font color="#888888 "><i>  225   </i></font></a>    2.0164337349062, 2.02571394786385, 2.03508435372962, 2.04454796521753,
+<a name="226"><font color="#888888 "><i>  226   </i></font></a>    2.05410793165065, 2.06376754781173, 2.07353026351874, 2.0833996939983,
+<a name="227"><font color="#888888 "><i>  227   </i></font></a>    2.09337963113879, 2.10347405571488, 2.11368715068665, 2.12402331568952,
+<a name="228"><font color="#888888 "><i>  228   </i></font></a>    2.13448718284602, 2.14508363404789, 2.15581781987674, 2.16669518035431,
+<a name="229"><font color="#888888 "><i>  229   </i></font></a>    2.17772146774029, 2.18890277162636, 2.20024554661128, 2.21175664288416,
+<a name="230"><font color="#888888 "><i>  230   </i></font></a>    2.22344334009251, 2.23531338492992, 2.24737503294739, 2.25963709517379,
+<a name="231"><font color="#888888 "><i>  231   </i></font></a>    2.27210899022838, 2.28480080272449, 2.29772334890286, 2.31088825060137,
+<a name="232"><font color="#888888 "><i>  232   </i></font></a>    2.32430801887113, 2.33799614879653, 2.35196722737914, 2.36623705671729,
+<a name="233"><font color="#888888 "><i>  233   </i></font></a>    2.38082279517208, 2.39574311978193, 2.41101841390112, 2.42667098493715,
+<a name="234"><font color="#888888 "><i>  234   </i></font></a>    2.44272531820036, 2.4592083743347, 2.47614993967052, 2.49358304127105,
+<a name="235"><font color="#888888 "><i>  235   </i></font></a>    2.51154444162669, 2.53007523215985, 2.54922155032478, 2.56903545268184,
+<a name="236"><font color="#888888 "><i>  236   </i></font></a>    2.58957598670829, 2.61091051848882, 2.63311639363158, 2.65628303757674,
+<a name="237"><font color="#888888 "><i>  237   </i></font></a>    2.68051464328574, 2.70593365612306, 2.73268535904401, 2.76094400527999,
+<a name="238"><font color="#888888 "><i>  238   </i></font></a>    2.79092117400193, 2.82287739682644, 2.85713873087322, 2.89412105361341,
+<a name="239"><font color="#888888 "><i>  239   </i></font></a>    2.93436686720889, 2.97860327988184, 3.02783779176959, 3.08352613200214,
+<a name="240"><font color="#888888 "><i>  240   </i></font></a>    3.147889289518, 3.2245750520478, 3.32024473383983, 3.44927829856143,
+<a name="241"><font color="#888888 "><i>  241   </i></font></a>    3.65415288536101, 3.91075795952492 <b>}</b>;
+<a name="242"><font color="#888888 "><i>  242   </i></font></a>
+<a name="243"><font color="#888888 "><i>  243   </i></font></a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a> b_r;
+<a name="244"><font color="#888888 "><i>  244   </i></font></a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a> u;
+<a name="245"><font color="#888888 "><i>  245   </i></font></a>  <font color="#112266"><b>static</b></font> <font color="#112266"><b>const</b></font> <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a> dv1[257] = <b>{</b> 1.0, 0.977101701267673, 0.959879091800108,
+<a name="246"><font color="#888888 "><i>  246   </i></font></a>    0.9451989534423, 0.932060075959231, 0.919991505039348, 0.908726440052131,
+<a name="247"><font color="#888888 "><i>  247   </i></font></a>    0.898095921898344, 0.887984660755834, 0.878309655808918, 0.869008688036857,
+<a name="248"><font color="#888888 "><i>  248   </i></font></a>    0.860033621196332, 0.851346258458678, 0.842915653112205, 0.834716292986884,
+<a name="249"><font color="#888888 "><i>  249   </i></font></a>    0.826726833946222, 0.818929191603703, 0.811307874312656, 0.803849483170964,
+<a name="250"><font color="#888888 "><i>  250   </i></font></a>    0.796542330422959, 0.789376143566025, 0.782341832654803, 0.775431304981187,
+<a name="251"><font color="#888888 "><i>  251   </i></font></a>    0.768637315798486, 0.761953346836795, 0.755373506507096, 0.748892447219157,
+<a name="252"><font color="#888888 "><i>  252   </i></font></a>    0.742505296340151, 0.736207598126863, 0.729995264561476, 0.72386453346863,
+<a name="253"><font color="#888888 "><i>  253   </i></font></a>    0.717811932630722, 0.711834248878248, 0.705928501332754, 0.700091918136512,
+<a name="254"><font color="#888888 "><i>  254   </i></font></a>    0.694321916126117, 0.688616083004672, 0.682972161644995, 0.677388036218774,
+<a name="255"><font color="#888888 "><i>  255   </i></font></a>    0.671861719897082, 0.66639134390875, 0.660975147776663, 0.655611470579697,
+<a name="256"><font color="#888888 "><i>  256   </i></font></a>    0.650298743110817, 0.645035480820822, 0.639820277453057, 0.634651799287624,
+<a name="257"><font color="#888888 "><i>  257   </i></font></a>    0.629528779924837, 0.624450015547027, 0.619414360605834, 0.614420723888914,
+<a name="258"><font color="#888888 "><i>  258   </i></font></a>    0.609468064925773, 0.604555390697468, 0.599681752619125, 0.594846243767987,
+<a name="259"><font color="#888888 "><i>  259   </i></font></a>    0.590047996332826, 0.585286179263371, 0.580559996100791, 0.575868682972354,
+<a name="260"><font color="#888888 "><i>  260   </i></font></a>    0.571211506735253, 0.566587763256165, 0.561996775814525, 0.557437893618766,
+<a name="261"><font color="#888888 "><i>  261   </i></font></a>    0.552910490425833, 0.548413963255266, 0.543947731190026, 0.539511234256952,
+<a name="262"><font color="#888888 "><i>  262   </i></font></a>    0.535103932380458, 0.530725304403662, 0.526374847171684, 0.522052074672322,
+<a name="263"><font color="#888888 "><i>  263   </i></font></a>    0.517756517229756, 0.513487720747327, 0.509245245995748, 0.505028667943468,
+<a name="264"><font color="#888888 "><i>  264   </i></font></a>    0.500837575126149, 0.49667156905249, 0.492530263643869, 0.488413284705458,
+<a name="265"><font color="#888888 "><i>  265   </i></font></a>    0.484320269426683, 0.480250865909047, 0.476204732719506, 0.47218153846773,
+<a name="266"><font color="#888888 "><i>  266   </i></font></a>    0.468180961405694, 0.464202689048174, 0.460246417812843, 0.456311852678716,
+<a name="267"><font color="#888888 "><i>  267   </i></font></a>    0.452398706861849, 0.448506701507203, 0.444635565395739, 0.440785034665804,
+<a name="268"><font color="#888888 "><i>  268   </i></font></a>    0.436954852547985, 0.433144769112652, 0.429354541029442, 0.425583931338022,
+<a name="269"><font color="#888888 "><i>  269   </i></font></a>    0.421832709229496, 0.418100649837848, 0.414387534040891, 0.410693148270188,
+<a name="270"><font color="#888888 "><i>  270   </i></font></a>    0.407017284329473, 0.403359739221114, 0.399720314980197, 0.396098818515832,
+<a name="271"><font color="#888888 "><i>  271   </i></font></a>    0.392495061459315, 0.388908860018789, 0.385340034840077, 0.381788410873393,
+<a name="272"><font color="#888888 "><i>  272   </i></font></a>    0.378253817245619, 0.374736087137891, 0.371235057668239, 0.367750569779032,
+<a name="273"><font color="#888888 "><i>  273   </i></font></a>    0.364282468129004, 0.360830600989648, 0.357394820145781, 0.353974980800077,
+<a name="274"><font color="#888888 "><i>  274   </i></font></a>    0.350570941481406, 0.347182563956794, 0.343809713146851, 0.340452257044522,
+<a name="275"><font color="#888888 "><i>  275   </i></font></a>    0.337110066637006, 0.333783015830718, 0.330470981379163, 0.327173842813601,
+<a name="276"><font color="#888888 "><i>  276   </i></font></a>    0.323891482376391, 0.320623784956905, 0.317370638029914, 0.314131931596337,
+<a name="277"><font color="#888888 "><i>  277   </i></font></a>    0.310907558126286, 0.307697412504292, 0.30450139197665, 0.301319396100803,
+<a name="278"><font color="#888888 "><i>  278   </i></font></a>    0.298151326696685, 0.294997087799962, 0.291856585617095, 0.288729728482183,
+<a name="279"><font color="#888888 "><i>  279   </i></font></a>    0.285616426815502, 0.282516593083708, 0.279430141761638, 0.276356989295668,
+<a name="280"><font color="#888888 "><i>  280   </i></font></a>    0.273297054068577, 0.270250256365875, 0.267216518343561, 0.264195763997261,
+<a name="281"><font color="#888888 "><i>  281   </i></font></a>    0.261187919132721, 0.258192911337619, 0.255210669954662, 0.252241126055942,
+<a name="282"><font color="#888888 "><i>  282   </i></font></a>    0.249284212418529, 0.246339863501264, 0.24340801542275, 0.240488605940501,
+<a name="283"><font color="#888888 "><i>  283   </i></font></a>    0.237581574431238, 0.23468686187233, 0.231804410824339, 0.228934165414681,
+<a name="284"><font color="#888888 "><i>  284   </i></font></a>    0.226076071322381, 0.223230075763918, 0.220396127480152, 0.217574176724331,
+<a name="285"><font color="#888888 "><i>  285   </i></font></a>    0.214764175251174, 0.211966076307031, 0.209179834621125, 0.206405406397881,
+<a name="286"><font color="#888888 "><i>  286   </i></font></a>    0.203642749310335, 0.200891822494657, 0.198152586545776, 0.195425003514135,
+<a name="287"><font color="#888888 "><i>  287   </i></font></a>    0.192709036903589, 0.190004651670465, 0.187311814223801, 0.1846304924268,
+<a name="288"><font color="#888888 "><i>  288   </i></font></a>    0.181960655599523, 0.179302274522848, 0.176655321443735, 0.174019770081839,
+<a name="289"><font color="#888888 "><i>  289   </i></font></a>    0.171395595637506, 0.168782774801212, 0.166181285764482, 0.163591108232366,
+<a name="290"><font color="#888888 "><i>  290   </i></font></a>    0.161012223437511, 0.158444614155925, 0.15588826472448, 0.153343161060263,
+<a name="291"><font color="#888888 "><i>  291   </i></font></a>    0.150809290681846, 0.148286642732575, 0.145775208005994, 0.143274978973514,
+<a name="292"><font color="#888888 "><i>  292   </i></font></a>    0.140785949814445, 0.138308116448551, 0.135841476571254, 0.133386029691669,
+<a name="293"><font color="#888888 "><i>  293   </i></font></a>    0.130941777173644, 0.12850872228, 0.126086870220186, 0.123676228201597,
+<a name="294"><font color="#888888 "><i>  294   </i></font></a>    0.12127680548479, 0.11888861344291, 0.116511665625611, 0.114145977827839,
+<a name="295"><font color="#888888 "><i>  295   </i></font></a>    0.111791568163838, 0.109448457146812, 0.107116667774684, 0.104796225622487,
+<a name="296"><font color="#888888 "><i>  296   </i></font></a>    0.102487158941935, 0.10018949876881, 0.0979032790388625, 0.095628536713009,
+<a name="297"><font color="#888888 "><i>  297   </i></font></a>    0.093365311912691, 0.0911136480663738, 0.0888735920682759,
+<a name="298"><font color="#888888 "><i>  298   </i></font></a>    0.0866451944505581, 0.0844285095703535, 0.082223595813203,
+<a name="299"><font color="#888888 "><i>  299   </i></font></a>    0.0800305158146631, 0.0778493367020961, 0.0756801303589272,
+<a name="300"><font color="#888888 "><i>  300   </i></font></a>    0.0735229737139814, 0.0713779490588905, 0.0692451443970068,
+<a name="301"><font color="#888888 "><i>  301   </i></font></a>    0.0671246538277886, 0.065016577971243, 0.0629210244377582, 0.06083810834954,
+<a name="302"><font color="#888888 "><i>  302   </i></font></a>    0.0587679529209339, 0.0567106901062031, 0.0546664613248891,
+<a name="303"><font color="#888888 "><i>  303   </i></font></a>    0.0526354182767924, 0.0506177238609479, 0.0486135532158687,
+<a name="304"><font color="#888888 "><i>  304   </i></font></a>    0.0466230949019305, 0.0446465522512946, 0.0426841449164746,
+<a name="305"><font color="#888888 "><i>  305   </i></font></a>    0.0407361106559411, 0.0388027074045262, 0.0368842156885674,
+<a name="306"><font color="#888888 "><i>  306   </i></font></a>    0.0349809414617162, 0.0330932194585786, 0.0312214171919203,
+<a name="307"><font color="#888888 "><i>  307   </i></font></a>    0.0293659397581334, 0.0275272356696031, 0.0257058040085489,
+<a name="308"><font color="#888888 "><i>  308   </i></font></a>    0.0239022033057959, 0.0221170627073089, 0.0203510962300445,
+<a name="309"><font color="#888888 "><i>  309   </i></font></a>    0.0186051212757247, 0.0168800831525432, 0.0151770883079353,
+<a name="310"><font color="#888888 "><i>  310   </i></font></a>    0.0134974506017399, 0.0118427578579079, 0.0102149714397015,
+<a name="311"><font color="#888888 "><i>  311   </i></font></a>    0.00861658276939875, 0.00705087547137324, 0.00552240329925101,
+<a name="312"><font color="#888888 "><i>  312   </i></font></a>    0.00403797259336304, 0.00260907274610216, 0.0012602859304986,
+<a name="313"><font color="#888888 "><i>  313   </i></font></a>    0.000477467764609386 <b>}</b>;
+<a name="314"><font color="#888888 "><i>  314   </i></font></a>
+<a name="315"><font color="#888888 "><i>  315   </i></font></a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a> x;
+<a name="316"><font color="#888888 "><i>  316   </i></font></a>  i6 = r-&gt;size[0] * r-&gt;size[1];
+<a name="317"><font color="#888888 "><i>  317   </i></font></a>  r-&gt;size[0] = (<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)varargin_1;
+<a name="318"><font color="#888888 "><i>  318   </i></font></a>  r-&gt;size[1] = 2;
+<a name="319"><font color="#888888 "><i>  319   </i></font></a>  <a href="sammon_emxutil_c.html#fcn_emxEnsureCapacity" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_emxEnsureCapacity');" target="rtwreport_document_frame"><font color="#1122aa">emxEnsureCapacity</font></a>((<a href="sammon_types_h.html#type_emxArray__common" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_emxArray__common');" target="rtwreport_document_frame"><font color="#1122aa">emxArray__common</font></a> *)r, i6, (<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)<font color="#112266"><b>sizeof</b></font>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a>));
+<a name="320"><font color="#888888 "><i>  320   </i></font></a>  i6 = (<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)varargin_1 &lt;&lt; 1;
+<a name="321"><font color="#888888 "><i>  321   </i></font></a>  <font color="#112266"><b>for</b></font> (k = 0; k &lt; i6; k++) <b>{</b>
+<a name="322"><font color="#888888 "><i>  322   </i></font></a>    <font color="#112266"><b>do</b></font> <b>{</b>
+<a name="323"><font color="#888888 "><i>  323   </i></font></a>      exitg1 = 0;
+<a name="324"><font color="#888888 "><i>  324   </i></font></a>      <a href="#fcn_genrand_uint32_vector" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_genrand_uint32_vector');" target="rtwreport_document_frame"><font color="#1122aa">genrand_uint32_vector</font></a>(<a href="sammon_data_c.html#var_state" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_state');" target="rtwreport_document_frame"><font color="#1122aa">state</font></a>, u32);
+<a name="325"><font color="#888888 "><i>  325   </i></font></a>      i = (<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)((u32[1] &gt;&gt; 24U) + 1U);
+<a name="326"><font color="#888888 "><i>  326   </i></font></a>      ip1 = (<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)(i + 1U) - 1;
+<a name="327"><font color="#888888 "><i>  327   </i></font></a>      b_r = (((<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a>)(u32[0] &gt;&gt; 3U) * 1.6777216E+7 + (<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a>)((<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)u32[1] &amp;
+<a name="328"><font color="#888888 "><i>  328   </i></font></a>               16777215)) * 2.2204460492503131E-16 - 1.0) * dv0[ip1];
+<a name="329"><font color="#888888 "><i>  329   </i></font></a>      <font color="#112266"><b>if</b></font> (fabs(b_r) &lt;= dv0[i - 1]) <b>{</b>
+<a name="330"><font color="#888888 "><i>  330   </i></font></a>        exitg1 = 1;
+<a name="331"><font color="#888888 "><i>  331   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <font color="#112266"><b>if</b></font> (i &lt; 256) <b>{</b>
+<a name="332"><font color="#888888 "><i>  332   </i></font></a>        u = <a href="#fcn_genrandu" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_genrandu');" target="rtwreport_document_frame"><font color="#1122aa">genrandu</font></a>(<a href="sammon_data_c.html#var_state" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_state');" target="rtwreport_document_frame"><font color="#1122aa">state</font></a>);
+<a name="333"><font color="#888888 "><i>  333   </i></font></a>        <font color="#112266"><b>if</b></font> (dv1[ip1] + u * (dv1[i - 1] - dv1[ip1]) &lt; exp(-0.5 * b_r * b_r)) <b>{</b>
+<a name="334"><font color="#888888 "><i>  334   </i></font></a>          exitg1 = 1;
+<a name="335"><font color="#888888 "><i>  335   </i></font></a>        <b>}</b>
+<a name="336"><font color="#888888 "><i>  336   </i></font></a>      <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="337"><font color="#888888 "><i>  337   </i></font></a>        <font color="#112266"><b>do</b></font> <b>{</b>
+<a name="338"><font color="#888888 "><i>  338   </i></font></a>          u = <a href="#fcn_genrandu" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_genrandu');" target="rtwreport_document_frame"><font color="#1122aa">genrandu</font></a>(<a href="sammon_data_c.html#var_state" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_state');" target="rtwreport_document_frame"><font color="#1122aa">state</font></a>);
+<a name="339"><font color="#888888 "><i>  339   </i></font></a>          x = log(u) * 0.273661237329758;
+<a name="340"><font color="#888888 "><i>  340   </i></font></a>          u = <a href="#fcn_genrandu" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_genrandu');" target="rtwreport_document_frame"><font color="#1122aa">genrandu</font></a>(<a href="sammon_data_c.html#var_state" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'var_state');" target="rtwreport_document_frame"><font color="#1122aa">state</font></a>);
+<a name="341"><font color="#888888 "><i>  341   </i></font></a>        <b>}</b> <font color="#112266"><b>while</b></font> (!(-2.0 * log(u) &gt; x * x));
+<a name="342"><font color="#888888 "><i>  342   </i></font></a>
+<a name="343"><font color="#888888 "><i>  343   </i></font></a>        <font color="#112266"><b>if</b></font> (b_r &lt; 0.0) <b>{</b>
+<a name="344"><font color="#888888 "><i>  344   </i></font></a>          b_r = x - 3.65415288536101;
+<a name="345"><font color="#888888 "><i>  345   </i></font></a>        <b>}</b> <font color="#112266"><b>else</b></font> <b>{</b>
+<a name="346"><font color="#888888 "><i>  346   </i></font></a>          b_r = 3.65415288536101 - x;
+<a name="347"><font color="#888888 "><i>  347   </i></font></a>        <b>}</b>
+<a name="348"><font color="#888888 "><i>  348   </i></font></a>
+<a name="349"><font color="#888888 "><i>  349   </i></font></a>        exitg1 = 1;
+<a name="350"><font color="#888888 "><i>  350   </i></font></a>      <b>}</b>
+<a name="351"><font color="#888888 "><i>  351   </i></font></a>    <b>}</b> <font color="#112266"><b>while</b></font> (exitg1 == 0);
+<a name="352"><font color="#888888 "><i>  352   </i></font></a>
+<a name="353"><font color="#888888 "><i>  353   </i></font></a>    r-&gt;data[(<a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="rtwreport_document_frame"><font color="#1122aa">int32_T</font></a>)(1.0 + (<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="rtwreport_document_frame"><font color="#1122aa">real_T</font></a>)k) - 1] = b_r;
+<a name="354"><font color="#888888 "><i>  354   </i></font></a>  <b>}</b>
+<a name="355"><font color="#888888 "><i>  355   </i></font></a><b>}</b>
+<a name="356"><font color="#888888 "><i>  356   </i></font></a>
+<a name="357"><font color="#888888 "><i>  357   </i></font></a><font color="#117755"><i>/* End of code generation (randn.c) */</i></font>
+<a name="358"><font color="#888888 "><i>  358   </i></font></a></pre>
+</td></tr></table>
+</p>
+</body>
+</html>

@@ -1,0 +1,2 @@
+qmake src/swarmviz.pro -config Release
+#doxygen Doxyfile
